@@ -1,0 +1,13 @@
+{
+  "name": "RxJS Ninja Library Template",
+  "mode": "modules",
+  "out": "docs",
+  "exclude": ["**/*.spec.ts", "tools/**/*"],
+  "excludeExternals": true,
+  "excludeNotExported": true,
+  "excludePrivate": true,
+  "stripInternal": true,
+  "readme": "README.md",
+  "includes": "libs/rxjs",
+  "tsconfig": "tsconfig.base.json"
+}

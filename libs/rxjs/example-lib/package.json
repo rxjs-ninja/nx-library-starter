@@ -1,0 +1,36 @@
+{
+  "name": "@rxjs-ninja/example-lib",
+  "description": "An example of an RxJS Typescript library for the web",
+  "version": "0.0.1",
+  "keywords": [
+    "Rx",
+    "RxJS",
+    "ReactiveX",
+    "ReactiveExtensions",
+    "Streams",
+    "Observables",
+    "Observable",
+    "Stream",
+    "Typescript",
+    "Reactive",
+    "Utility",
+    "FizzBuzz"
+  ],
+  "homepage": "https://rxjs.ninja",
+  "bugs": {
+    "url": "https://github.com/rxjs-ninja/nx-library-starter/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Tane Piper",
+    "url": "https://tane.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rxjs-ninja/nx-library-starter.git"
+  },
+  "peerDependencies": {
+    "@rxjs-ninja/rxjs-utility": "~2.1.2",
+    "rxjs": ">=6.5.0"
+  }
+}

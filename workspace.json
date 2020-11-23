@@ -1,6 +1,51 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "rxjs-example-lib": {
+      "root": "libs/rxjs/example-lib",
+      "sourceRoot": "libs/rxjs/example-lib/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/rxjs/example-lib/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/rxjs/example-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/web:package",
+          "options": {
+            "outputPath": "dist/libs/rxjs/example-lib",
+            "tsConfig": "libs/rxjs/example-lib/tsconfig.lib.json",
+            "project": "libs/rxjs/example-lib/package.json",
+            "entryFile": "libs/rxjs/example-lib/src/index.ts",
+            "external": ["rxjs"],
+            "babelConfig": "@nrwl/web/babel",
+            "assets": [
+              {
+                "glob": "README.md",
+                "input": "libs/rxjs/example-lib/.",
+                "output": "."
+              },
+              {
+                "glob": "CHANGELOG.md",
+                "input": "libs/rxjs/example-lib/.",
+                "output": "."
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "defaultCollection": "@nrwl/workspace"
   }
