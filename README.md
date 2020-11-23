@@ -41,8 +41,10 @@ Run `npm run docs` to generate docs using [Typedoc](https://typedoc.org) and out
 
 ## Github Action Pipeline
 
-To see how Github Actions can be used to publish these libraries see
-the setup at [rxjs-ninja](https://github.com/rxjs-ninja/rxjs-ninja/tree/main/.github)
+In the `.github` folder there are some YAML and Bash scripts provided that I have developed for working with NX Monorepos
+and publishing libraries with changelogs and documentation.
+
+To see how Github Actions can be used to publish these libraries see the setup at [rxjs-ninja](https://github.com/rxjs-ninja/rxjs-ninja).
 
 ## Further help
 

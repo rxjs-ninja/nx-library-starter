@@ -1,0 +1,49 @@
+# File for Pull Request on main branch
+name: PR on main
+
+# When a PR is opened to main
+on:
+  pull_request:
+    branches:
+      - main
+    types: [opened, reopened, synchronize]
+
+jobs:
+  build:
+    # Setup OS and Node Version
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Latest nodes only
+        node-version: [15.x]
+
+
+    # Define Steps
+    steps:
+      # Checkout code
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Make sure we have all branches
+      - name: Fetch other branches
+        run: git fetch --no-tags --prune --depth=5 origin main
+
+      - name: Install environment
+        run: |
+          rm -rf node_modules && rm -rf dist && rm -rf docs && rm -rf coverage
+          npm ci
+
+      - name: Run lint
+        run: ./.github/scripts/run-linting.sh False
+
+      - name: Tests coverage
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: ./.github/scripts/run-testing.sh False True $CODECOV_TOKEN
