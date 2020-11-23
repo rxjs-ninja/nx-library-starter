@@ -1,5 +1,5 @@
 {
-  "name": "@rxjs-ninja",
+  "name": "@rxjs-ninja/nx-library-starter",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
