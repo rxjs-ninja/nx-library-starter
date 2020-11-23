@@ -39,6 +39,11 @@ Run `nx affected:test` to execute the unit tests affected by a change.
 
 Run `npm run docs` to generate docs using [Typedoc](https://typedoc.org) and output to the `doc` folder.
 
+## Github Action Pipeline
+
+To see how Github Actions can be used to publish these libraries see
+the setup at [rxjs-ninja](https://github.com/rxjs-ninja/rxjs-ninja/tree/main/.github)
+
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
