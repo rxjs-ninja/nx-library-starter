@@ -49,9 +49,13 @@ Here the builder options in the project are replaced in `workspace.json` to use 
 }
 ```
 
-This also needs the `babel.config.json` and `.babelrc` files.  See the example folder for full details of the setup.
+This also needs the `babel.config.json` and `.babelrc` files.  
 
-Now when running `nx build rxjs-example-lib` a version is built that can be used in any environment including the web.
+In the library `tsconfig.lib.json` the `module` property needs to be changed from `commonjs` to `es2015`.
+
+See the example folder for full details of the setup.
+
+Now when running `nx build rxjs-example-lib` a version of the library is built that can be used in any environment including the web.
 
 ## Running unit tests
 
@@ -72,6 +76,33 @@ This also uses [typedoc-plugin-external-module-name](https://www.npmjs.com/packa
 In the `.github` folder there are some YAML and Bash scripts provided that I have developed for working with NX Monorepos and publishing libraries with changelogs and documentation.
 
 > This is provided as is, I use this actively in [rxjs-ninja](https://github.com/rxjs-ninja/rxjs-ninja) where it can be seen in action
+
+## Using the UMD Library
+
+When the library is published it can be used as a UMD library using [unpkg](https://unpkg.com) - here is an example of `RxJS` (the shim is [Issue #1](https://github.com/rxjs-ninja/nx-library-starter/issues/1)) with one of the RxJS Ninja libraries on a basic HTML page.
+
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Testing</title>
+    </head>
+
+    <body></body>
+
+    <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+    <script>
+        window.operators = rxjs.operators;
+    </script>
+    <script src="https://unpkg.com/@rxjs-ninja/rxjs-random@1.1.1/rxjs-random.umd.js"></script>
+
+    <script module>
+        const { tap } = rxjs.operators;
+        const { fromRandom } = RxjsRandom;
+        fromRandom(0, 1, 1000).pipe(tap(console.log)).subscribe()
+    </script>
+</html>
+```
 
 ## Further help
 
