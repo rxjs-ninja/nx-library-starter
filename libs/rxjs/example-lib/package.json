@@ -2,6 +2,7 @@
   "name": "@rxjs-ninja/example-lib",
   "description": "An example of an RxJS Typescript library for the web",
   "version": "0.0.1",
+  "private": true,
   "keywords": [
     "Rx",
     "RxJS",

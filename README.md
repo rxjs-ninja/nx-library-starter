@@ -1,37 +1,63 @@
 # RxJS Ninja Template Library
 
-This project was generated using [Nx](https://nx.dev).
-
 <p align="center">
     <img src="https://raw.githubusercontent.com/rxjs-ninja/rxjs-ninja/main/assets/logo.png" width="150">
     <img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="150">
 </p>
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+This repository is a Github Template for generating Typescript libraries for the web with UMD and ESM compilation.
+
+It's build using the [Nx](https://nx.dev) monorepo approach and is set up to allow for libraries to be developed with their own public API and compiled for use in any ECMAScript environment including node, framework or VanillaJS approaches.
 
 ## Library Setup
 
-This library uses two Nwrl capabilities:
+Included in this repo is the [Example Library](https://github.com/rxjs-ninja/nx-library-starter/tree/main/libs/rxjs/example-lib) - a small RxJS library that exports a `fizzbuzz` operator and an Observable `fromFizzbuzz` sequence generator.
 
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+To set this up I used `@nrwl/node` to generate the library:
 
-## Generate a library
+```
+> nx g @nrwl/node:lib example-lib --directory=rxjs --publishable --importPath=@rxjs-ninja/example-lib
+```
 
-Run ` nx g @nrwl/node:lib example-lib --directory=rxjs --publishable --importPath=@rxjs-ninja/example-lib` to generate a library.
+By default this sets up a node-compatible library using CommonJS, but this can cause issues with modern frameworks for the web.
 
-Libraries are publishable, see `workspace.json` and `libs/rxjs/example-lib` for further setup of the library for UMD publishing.
+Here the builder options in the project are replaced in `workspace.json` to use the `@nrwl/web` builder with Babel and Rollup, and add support for the readme and changelog:
 
-## Build
+```json
+"build": {
+  "builder": "@nrwl/web:package",
+  "options": {
+    "outputPath": "dist/libs/rxjs/example-lib",
+    "tsConfig": "libs/rxjs/example-lib/tsconfig.lib.json",
+    "project": "libs/rxjs/example-lib/package.json",
+    "entryFile": "libs/rxjs/example-lib/src/index.ts",
+    "external": ["rxjs"],
+    "babelConfig": "@nrwl/web/babel",
+    "assets": [
+      {
+        "glob": "README.md",
+        "input": "libs/rxjs/example-lib/.",
+        "output": "."
+      },
+      {
+        "glob": "CHANGELOG.md",
+        "input": "libs/rxjs/example-lib/.",
+        "output": "."
+      }
+    ]
+  }
+}
+```
 
-Run `nx build rxjs-example-lib` to build the library. 
-The build artifacts will be stored in the `dist/` directory.
+This also needs the `babel.config.json` and `.babelrc` files.  See the example folder for full details of the setup.
+
+Now when running `nx build rxjs-example-lib` a version is built that can be used in any environment including the web.
 
 ## Running unit tests
 
-Run `nx test rxjs-example-lib` to execute the unit tests via [Jest](https://jestjs.io).
+The unit tests in the library use [marble diagrams](https://rxmarbles.com/) to provide the data to the operators. Jest is integrated using [rxjs-marbles](https://www.npmjs.com/package/rxjs-marbles) and provides full code coverage too.
+
+Run `nx test rxjs-example-lib --codeCoverage` to execute the unit tests via [Jest](https://jestjs.io).
 
 Run `nx affected:test` to execute the unit tests affected by a change.
 
@@ -39,12 +65,13 @@ Run `nx affected:test` to execute the unit tests affected by a change.
 
 Run `npm run docs` to generate docs using [Typedoc](https://typedoc.org) and output to the `doc` folder.
 
+This also uses [typedoc-plugin-external-module-name](https://www.npmjs.com/package/typedoc-plugin-external-module-name) to provide better support for a module layout in documentation
+
 ## Github Action Pipeline
 
-In the `.github` folder there are some YAML and Bash scripts provided that I have developed for working with NX Monorepos
-and publishing libraries with changelogs and documentation.
+In the `.github` folder there are some YAML and Bash scripts provided that I have developed for working with NX Monorepos and publishing libraries with changelogs and documentation.
 
-To see how Github Actions can be used to publish these libraries see the setup at [rxjs-ninja](https://github.com/rxjs-ninja/rxjs-ninja).
+> This is provided as is, I use this actively in [rxjs-ninja](https://github.com/rxjs-ninja/rxjs-ninja) where it can be seen in action
 
 ## Further help
 
