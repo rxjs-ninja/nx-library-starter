@@ -23,6 +23,16 @@
         "build": {
           "builder": "@nrwl/web:package",
           "options": {
+            "globals": [
+              {
+                "moduleId": "rxjs",
+                "global": "rxjs"
+              },
+              {
+                "moduleId": "rxjs/operators",
+                "global": "rxjs.operators"
+              }
+            ],
             "outputPath": "dist/libs/rxjs/example-lib",
             "tsConfig": "libs/rxjs/example-lib/tsconfig.lib.json",
             "project": "libs/rxjs/example-lib/package.json",
