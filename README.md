@@ -104,7 +104,7 @@ Monorepos and publishing libraries with changelogs and documentation.
 ## Using the UMD Library
 
 When the library is published it can be used as a UMD library using [unpkg](https://unpkg.com) - here is an example
-of `RxJS` with two libraries from [RxJS Ninja](https://rxjs.ninja) on a basic HTML page.
+of `RxJS` with two libraries from [RxJS Ninja](https://rxjs.ninja) on a basic HTML page. A [StackBlitz Example](https://stackblitz.com/edit/rxjs-ninja-umd-example?file=index.html) is available.
 
 ```html
 <!DOCTYPE html>
