@@ -101,13 +101,10 @@ to provide better support for a module layout in documentation
 In the `.github` folder there are some YAML and Bash scripts provided that I have developed for working with NX
 Monorepos and publishing libraries with changelogs and documentation.
 
-> This is provided as is, I use this actively in [rxjs-ninja](https://github.com/rxjs-ninja/rxjs-ninja) where it can be seen in action
-
 ## Using the UMD Library
 
 When the library is published it can be used as a UMD library using [unpkg](https://unpkg.com) - here is an example
-of `RxJS` (the shim is [Issue #1](https://github.com/rxjs-ninja/nx-library-starter/issues/1)) with one of the RxJS Ninja
-libraries on a basic HTML page.
+of `RxJS` with two libraries from [RxJS Ninja](https://rxjs.ninja) on a basic HTML page.
 
 ```html
 <!DOCTYPE html>
@@ -116,15 +113,27 @@ libraries on a basic HTML page.
     <title>Testing</title>
   </head>
 
-  <body></body>
+  <body>
+    <div>Random Number: <span class="output"></span></div>
+  </body>
 
   <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
   <script src="https://unpkg.com/@rxjs-ninja/rxjs-random/rxjs-random.umd.js"></script>
+  <script src="https://unpkg.com/@rxjs-ninja/rxjs-number/rxjs-number.umd.js"></script>
 
   <script module>
+    const output = document.querySelector('.output');
+
     const { tap } = rxjs.operators;
     const { fromRandom } = RxjsRandom;
-    fromRandom(0, 1, 1000).pipe(tap(console.log)).subscribe();
+    const { roundTo } = RxjsNumber;
+    fromRandom(0, 1, 1000)
+      .pipe(
+        roundTo(4),
+        tap(console.log),
+        tap((value) => (output.innerHTML = value)),
+      )
+      .subscribe();
   </script>
 </html>
 ```
