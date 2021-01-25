@@ -119,7 +119,7 @@ libraries on a basic HTML page.
   <body></body>
 
   <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
-  <script src="https://unpkg.com/@rxjs-ninja/rxjs-random@1.1.1/rxjs-random.umd.js"></script>
+  <script src="https://unpkg.com/@rxjs-ninja/rxjs-random/rxjs-random.umd.js"></script>
 
   <script module>
     const { tap } = rxjs.operators;
