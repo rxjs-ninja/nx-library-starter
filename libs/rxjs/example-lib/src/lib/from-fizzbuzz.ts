@@ -34,7 +34,7 @@ export function fromFizzbuzz(iterations: number, emitDelay = 0): Observable<stri
           (value) => (value % 15 == 0 ? `FizzBuzz` : value % 3 === 0 ? 'Fizz' : 'Buzz'),
           (value) => value,
         ),
-        tap((value) => subscriber.next(value as any)),
+        tap((value) => subscriber.next(value as never)),
         finalize(() => subscriber.complete()),
       )
       .subscribe();
