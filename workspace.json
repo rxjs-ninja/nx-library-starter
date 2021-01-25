@@ -23,11 +23,25 @@
         "build": {
           "builder": "@nrwl/web:package",
           "options": {
+            "globals": [
+              {
+                "moduleId": "rxjs",
+                "global": "rxjs"
+              },
+              {
+                "moduleId": "rxjs/operators",
+                "global": "rxjs.operators"
+              },
+              {
+                "moduleId": "@rxjs-ninja/rxjs-utility",
+                "global": "RxjsUtility"
+              }
+            ],
             "outputPath": "dist/libs/rxjs/example-lib",
             "tsConfig": "libs/rxjs/example-lib/tsconfig.lib.json",
             "project": "libs/rxjs/example-lib/package.json",
             "entryFile": "libs/rxjs/example-lib/src/index.ts",
-            "external": ["rxjs"],
+            "external": ["rxjs", "@rxjs-ninja/rxjs-utility"],
             "babelConfig": "@nrwl/web/babel",
             "assets": [
               {
